@@ -34,8 +34,7 @@ export default function Root() {
   // khai bao useMemo
   const contextValue = useMemo(
     () => ({
-      name: 'Ant Design',
-      file: 'zip, rar, 7z'
+      name: 'Thêm Mới Truyện'
     }),
     [],
   );
@@ -45,12 +44,12 @@ export default function Root() {
 
   // kiêm tra xem đã điều hướng loading được dữ liệu lên hết chưa
   const navigation = useNavigation();
-  console.log('authStore', authStore);
+  // console.log('authStore', authStore);
   const user = localStorage.getItem('user');
 
   const logout = () => {
     authStore.signout();
-    navigation('/');
+    // navigation('/login');
   }
 
    // lay ra gia tri tu store

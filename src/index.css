@@ -387,3 +387,6 @@ i {
 .green {
   background-color: green;
 }
+.displayLogin{
+  display: none !important;
+}

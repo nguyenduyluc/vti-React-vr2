@@ -36,18 +36,16 @@ export default function DataComponent() {
     const dispatch = useDispatch();
 
     const handleUpdateStore = (e) => {
-        console.log(value, "adda");
         dispatch(updateText(value));
     }
 
     useEffect(() => {
         callapi();
     }, []);
-
+//  call api novel
     const callapi = () => {
         const data = axios.get(envApi)
             .then(res => {
-                console.log('res', res);
                 setData(res.data)
             })
             .catch(err => console.log(err));
@@ -56,7 +54,7 @@ export default function DataComponent() {
     }
 
     const handleShowModal = (item, index) => {
-        console.log(item, index, "=====");
+        // console.log(item, index, "=====");
         setIsModalOpen(true);
 
         // click ban ghi thi setiTEMINFO is item
@@ -83,9 +81,9 @@ export default function DataComponent() {
     const handleOkeDelete = () => {
         const data = axios.delete(envApi + `/${itemInfo.id}`)
             .then(res => {
-                console.log('res', res);
+                // console.log('res', res);
 
-                // setData(res.data)
+                setData(res.data)
             }).then(() => {
                 callapi();
                 setisModalOpenDelete(false);
@@ -127,9 +125,9 @@ export default function DataComponent() {
                         }
                     >
                         <List.Item.Meta
-                            avatar={<Avatar src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`} />}
-                            title={<>{item.name}</>}
-                            description={item.address + '--' + item.phone}
+                            avatar={<Avatar src={item.image} />}
+                            title={<>{item.novelsTitle}</>}
+                            description={item.author + '--' + item.categoryName}
                         />
                     </List.Item>
                 )}

@@ -9,7 +9,7 @@ export async function callApi() {
     .then((json) => {
       contacts = json;
       // data da dc set trang thai
-      console.log(json);
+   
     });
     return contacts;
 }

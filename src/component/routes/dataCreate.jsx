@@ -2,7 +2,7 @@ import axios from "axios";
 import * as React from "react";
 import { useState, useContext } from "react";
 import { Form, Navigate, redirect, useParams } from 'react-router-dom';
-import { envApi } from "../../environtment";
+import { noverCreateApi } from "../../environtment";
 
 import { Button, Divider, Space, notification } from 'antd';
 import { Context } from './../../routes/root';
@@ -16,7 +16,7 @@ import { ContextValue } from "./contexValue";
 
 export default function DataCreateComponent() {
 
-    const [contact, setContact] = useState({ name: '', address: '', avatar: '', phone: '' });
+    const [contact, setContact] = useState({  novelsTitle: '', author: '', image: '', categoryName: '' });
     const paramUrl = useParams('dataId');
 
     // const theme = useContext(Context);
@@ -27,6 +27,7 @@ export default function DataCreateComponent() {
 
     // khai bao context khoi tao 
     const [api, contextHolder] = notification.useNotification();
+
     // khoi tao mở ra thông báo lấy dữ liệu từ contex
     const openNotification = (placement) => {
         api.info({
@@ -37,30 +38,34 @@ export default function DataCreateComponent() {
     };
 
     // kahi bao input ref name
-    const inputRefName = useRef(null);
-    const inputRefAress = useRef(null);
-    const inputRefAvatar = useRef(null);
-    const inputRefPhone = useRef(null);
+    const inputRefnovelsTitle = useRef(null);
+    const inputRefAuthor = useRef(null);
+    const inputRefImage = useRef(null);
+    const inputRefCategoryName = useRef(null);
 
     const handleCancel = () => {
         navigate('/data');
     }
     const handlePostData = async () => {
         // lay name tuong ung khi nhap
-        console.log('handlePostData', inputRefName.current.value);
+      
         // btvn kiem tra du lieu dung dang so hay bat buoc nhap chua thi moi gui api
         const dataPost = {
-            name: inputRefName.current.value,
-            phone: inputRefPhone.current.value,
-            address: inputRefAress.current.value,
-            avatar: inputRefAvatar.current.value
+            novelsTitle: inputRefnovelsTitle.current.value,
+            categoryName: inputRefCategoryName.current.value,
+            author: inputRefAuthor.current.value,
+            image: inputRefImage.current.value
         }
-
         // call api
-        await axios.post(envApi, dataPost).then(res => {
-            console.log('oke');
+        await axios.post(noverCreateApi, dataPost , {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        }).then(res => {
+
+            // console.log('oke');
         }).then ( () => {
-            openNotification('topLeft');
+            // openNotification('topLeft');
         }).then(() => {
             setTimeout(() => {
                 navigate('/data');
@@ -81,45 +86,44 @@ export default function DataCreateComponent() {
             
             <Form id="contact-form">
                 <p>
-                    <span>Name</span>
+                    <span>Novels Title</span>
                     <input
-                        placeholder="name"
-                        aria-label="Last name"
+                        placeholder="Novels Title"
                         type="text"
-                        name="name"
-                        ref={inputRefName}
-                        defaultValue={contact.name}
+                        name="novelsTitle"
+                        ref={inputRefnovelsTitle}
+                        defaultValue={contact.novelsTitle}
                     />
                 </p>
                 <label>
-                    <span>Adress</span>
+                    <span>Author</span>
                     <input
                         type="text"
-                        name="address"
-                        placeholder="@jack"
-                        defaultValue={contact.address}
-                        ref={inputRefAress}
+                        name="Author"
+                        placeholder="Author"
+                        defaultValue={contact.author}
+                        // lấy data từ input này
+                        ref={inputRefAuthor}
                     />
                 </label>
                 <label>
-                    <span>Avatar</span>
+                    <span>Image</span>
                     <input
-                        placeholder="https://example.com/avatar.jpg"
-                        aria-label="Avatar URL"
+                        placeholder="them anh"
                         type="text"
-                        name="avatar"
-                        defaultValue={contact.avatar}
-                        ref={inputRefAvatar}
+                        name="image"
+                        defaultValue={contact.image}
+                        ref={inputRefImage}
                     />
                 </label>
                 <label>
-                    <span>phone</span>
+                    <span>CategoryName</span>
                     <input
                         type="text"
-                        name="phone"
-                        placeholder="@098"
-                        defaultValue={contact.phone}
-                        ref={inputRefPhone}
+                        name="categoryName"
+                        placeholder="categoryName"
+                        defaultValue={contact.categoryName}
+                        ref={inputRefCategoryName}
                     />
                 </label>
                 <p>

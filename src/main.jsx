@@ -111,9 +111,9 @@ function AuthProvider({ children }) {
 
   let signin = (newUser, callback) => {
     return fakeAuthProvider.signin(() => {
-      setUser(newUser.user.email);
-      localStorage.setItem("tokenUser", newUser._tokenResponse.idToken);
-      localStorage.setItem("user", newUser.user.email);
+      setUser(newUser.data.username);
+      localStorage.setItem('token', newUser.data.token)
+      localStorage.setItem("user", newUser.data.username);
       callback;
     });
   };

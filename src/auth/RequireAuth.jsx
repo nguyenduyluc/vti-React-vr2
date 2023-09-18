@@ -9,7 +9,7 @@ export default function RequireAuth({ children }) {
     // context api lấy ra state
     let auth = useAuth();
     let location = useLocation();
-    const geUserStorage = localStorage.getItem('tokenUser');
+    const geUserStorage = localStorage.getItem('token');
     if (!geUserStorage) {
         // Redirect them to the /login page, but save the current location they were
         // trying to go to when they were redirected. This allows us to send them

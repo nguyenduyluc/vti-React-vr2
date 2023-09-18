@@ -14,7 +14,7 @@ import { useRef } from 'react';
 
 import { ContextValue } from "./contexValue";
 
-export default function DataEditComponent() {
+export default function DataCreateComponent() {
 
     const [contact, setContact] = useState({ name: '', address: '', avatar: '', phone: '' });
     const paramUrl = useParams('dataId');
@@ -42,16 +42,9 @@ export default function DataEditComponent() {
     const inputRefAvatar = useRef(null);
     const inputRefPhone = useRef(null);
 
-    React.useEffect(() => {
-        // call api get lay ra chi tiet cua item user data
-        if (paramUrl?.dataId) {
-            axios.get(envApi + `/${paramUrl?.dataId}`).then(res => setContact(res.data));
-        }
-    }, []);
-
-//     const handleCancel = () => {
-// navigate{'./data'};
-//     }
+    const handleCancel = () => {
+        navigate('/data');
+    }
     const handlePostData = async () => {
         // lay name tuong ung khi nhap
         console.log('handlePostData', inputRefName.current.value);
@@ -64,7 +57,7 @@ export default function DataEditComponent() {
         }
 
         // call api
-        await axios.put(envApi + `/${paramUrl?.dataId}`, dataPost).then(res => {
+        await axios.post(envApi, dataPost).then(res => {
             console.log('oke');
         }).then ( () => {
             openNotification('topLeft');

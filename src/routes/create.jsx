@@ -17,8 +17,7 @@ export async function action({ request, params }) {
 
 
 
-export default function EditContact() {
-  const { contact } = useLoaderData();
+export default function CreateContact() {
 
   return (
     <Form method="post" id="contact-form">
@@ -29,14 +28,14 @@ export default function EditContact() {
           aria-label="First name"
           type="text"
           name="first"
-          defaultValue={contact.first}
+          defaultValue=''
         />
         <input
           placeholder="Last"
           aria-label="Last name"
           type="text"
           name="last"
-          defaultValue={contact.last}
+          defaultValue=''
         />
       </p>
       <label>
@@ -45,7 +44,7 @@ export default function EditContact() {
           type="text"
           name="twitter"
           placeholder="@jack"
-          defaultValue={contact.twitter}
+          defaultValue=''
         />
       </label>
       <label>
@@ -55,14 +54,14 @@ export default function EditContact() {
           aria-label="Avatar URL"
           type="text"
           name="avatar"
-          defaultValue={contact.avatar}
+          defaultValue=''
         />
       </label>
       <label>
         <span>Notes</span>
         <textarea
           name="notes"
-          defaultValue={contact.notes}
+          defaultValue=''
           rows={6}
         />
       </label>

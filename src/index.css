@@ -100,6 +100,7 @@ form[action$="destroy"] button {
   display: flex;
   height: 100%;
   width: 100%;
+  justify-content: center;
 }
 
 #sidebar {
@@ -379,4 +380,10 @@ i {
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+
+
+
+.green {
+  background-color: green;
 }

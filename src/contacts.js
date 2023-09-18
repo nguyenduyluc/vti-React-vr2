@@ -66,6 +66,21 @@ export async function updateContact(id, updates) {
   return contact;
 }
 
+export async function CreateContact(updates) {
+  await fakeNetwork();
+  // lấy ra một danh sách contacts
+  //let contacts = await localforage.getItem("contacts");
+  // tìm object contatc với id tương ứng trong list contact bên trên
+  // nếu chưa có thì in ra lỗi
+  if (!contact) throw new Error("No contact found for", id);
+  // nếu tìm được thì gán contact tìm được bằng cái object updates mà mình mình thêm vào form khi nãy
+  Object.assign(contact, updates);
+  // thực hiện set lại giá trị mảng contacs
+  await set(contacts);
+  return contact;
+}
+
+
 export async function deleteContact(id) {
   let contacts = await localforage.getItem("contacts");
   let index = contacts.findIndex(contact => contact.id === id);
